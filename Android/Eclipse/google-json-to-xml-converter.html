@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Android Asset Studio - Launcher icon generator</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Mono:300" type="text/css">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-amber.min.css" />
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        body { font-family: Roboto, Helvetica };
+    </style>
+</head>
+
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <span class="mdl-layout-title">Title</span>
+            </div>
+        </header>
+        <main class="mdl-layout__content">
+            <div class="page-content">
+                <div class="mdl-grid">
+                    <!-- 1st row -->
+                    <div class="mdl-cell mdl-cell--3-col"></div>
+                    <div class="mdl-cell mdl-cell--6-col">
+                        <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="padding: 4px; width: 100%">
+                            <div>
+                                <ol>
+                                    <li>Sign in to Firebase and open your project.</li>
+                                    <li>Click <img src="//storage.googleapis.com/support-kms-prod/vMSwtm9y2uvHQAg2OfjmWpsBMtG4xwSIPWxh" height="24" width="24" alt="the Settings icon"/> and select <strong>Project settings</strong>.</li>
+                                    <li>In the <b>Your apps</b> card, select the package name of the app you need a config file for from the list.</li>
+                                    <li>Click <img src="//lh3.googleusercontent.com/F_l_k73LFMmhZzlG3uUxR85785RlZFMYIszJFNl6Xq4k_xMLdgotg_O95JGyk8bSlQ=w24" alt="" height="24" width="24"/> <strong>google-services.json</strong></li>
+                                </ol>
+                            </div>
+                            <div class="mdl-card__actions mdl-card--border">
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                                        onclick="window.open('https://console.firebase.google.com', 'download-google-services-json')">Go To Firebase Console</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--3-col"></div>
+
+                    <!-- 2nd row -->
+                    <div class="mdl-cell mdl-cell--3-col"></div>
+                    <div class="mdl-cell mdl-cell--6-col">
+                        <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="padding: 4px; width: 100%">
+                            <textarea id="json-textarea" rows="10" style="border: 1px solid #AAAAAA; font-family: 'Roboto Mono', monospace; font-size: 8pt"></textarea>
+                            <div class="mdl-card__actions mdl-card--border">
+                                <input type="file" id="json-file" style="display: none" onchange="readGoogleServicesJson()"/>
+                                <label for="json-file" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                                    Open google-services.json
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--3-col"></div>
+
+                    <!-- 3rd row -->
+                    <div class="mdl-cell mdl-cell--3-col"></div>
+                    <div class="mdl-cell mdl-cell--6-col">
+                        <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="padding: 4px; width: 100%">
+                            <div class="mdl-card__menu">
+                                <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-button--colored"
+                                        onclick="window.open('https://developers.google.com/android/guides/google-services-plugin#processing_the_json_file', 'processing-json-file')">
+                                    <i class="material-icons">info_outline</i>
+                                </button>
+                            </div>
+                            <textarea id="xml-textarea" rows="10" style="border: 1px solid #AAAAAA; font-family: 'Roboto Mono', monospace; font-size: 8pt"></textarea>
+                            <div class="mdl-card__actions mdl-card--border">
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                                        onclick="saveGoogleServicesXml()">
+                                    Save google-services.xml
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--3-col"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="text/javascript">
+        function readGoogleServicesJson() {
+            var file = $('#json-file')[0].files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.readAsText(file, "UTF-8");
+                reader.onload = function(evt) {
+                    // JSON
+                    $('#json-textarea').val(evt.target.result);
+                    var json = $.parseJSON(evt.target.result);
+
+                    // XML
+                    var xml = [];
+                    xml.push('<?xml version="1.0" encoding="utf-8"?>');
+                    xml.push('<resources>');
+                    xml.push('    <string name="google_app_id"                  translatable="false">' + json.client[0].client_info.mobilesdk_app_id + '</string>');
+                    xml.push('    <string name="gcm_defaultSenderId"            translatable="false">' + json.project_info.project_number            + '</string>');
+                    xml.push('    <string name="default_web_client_id"          translatable="false">' + json.client[0].oauth_client[0].client_id    + '</string>');
+                    xml.push('    <string name="ga_trackingId"                  translatable="false">' + '???'                                       + '</string>');
+                    xml.push('    <string name="firebase_database_url"          translatable="false">' + json.project_info.firebase_url              + '</string>');
+                    xml.push('    <string name="google_api_key"                 translatable="false">' + json.client[0].api_key[0].current_key       + '</string>');
+                    xml.push('    <string name="google_crash_reporting_api_key" translatable="false">' + json.client[0].api_key[0].current_key       + '</string>');
+                    xml.push('</resources>');
+
+                    $('#xml-textarea').val(xml.join('\r\n'));
+                }
+            }
+        }
+
+        function saveGoogleServicesXml() {
+            var text = $('#xml-textarea').val();
+            var dataUri = "data:text/xml;charset=UTF-8," + encodeURIComponent(text);
+            window.open(dataUri);
+        }
+    </script>
+</body>
