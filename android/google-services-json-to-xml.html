@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
-    <title>Convert google-services.json</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Convert google-services.json to values XML</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:300" type="text/css">
@@ -12,13 +13,14 @@
         body       { font-family: Roboto, Helvetica }
         .mdl-radio { display: inline-block; width: 75% }
     </style>
+
 </head>
 
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
-                <span class="mdl-layout-title">Convert google-services.json to XML</span>
+                <span class="mdl-layout-title">Convert google-services.json to values XML</span>
                 <div class="mdl-layout-spacer"></div>
                 <a href="https://github.com/dandar3/dandar3.github.io/blob/master/android/google-services-json-to-xml.html" id="github">
                     <svg height="32" class="octicon octicon-logo-github" viewBox="0 0 45 16" version="1.1" width="90" aria-hidden="true" style="fill: #FFFFFF">
@@ -29,12 +31,20 @@
                 </div>
             </div>
         </header>
+
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Menu</span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="..">Home</a>
+            </nav>
+        </div>
+
         <main class="mdl-layout__content">
             <div class="page-content">
                 <div class="mdl-grid">
                     <!-- 1st row -->
-                    <div class="mdl-cell mdl-cell--3-col"></div>
-                    <div class="mdl-cell mdl-cell--6-col">
+                    <div class="mdl-cell mdl-cell--3-col mdl-cell--1-col-tablet mdl-cell--0-col-phone"></div>
+                    <div class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
                         <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="padding: 4px; width: 100%">
                             <div>
                                 <ol>
@@ -50,11 +60,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mdl-cell mdl-cell--3-col"></div>
+                    <div class="mdl-cell mdl-cell--3-col mdl-cell--1-col-tablet mdl-cell--0-col-phone"></div>
 
                     <!-- 2nd row -->
-                    <div class="mdl-cell mdl-cell--3-col"></div>
-                    <div class="mdl-cell mdl-cell--6-col">
+                    <div class="mdl-cell mdl-cell--3-col mdl-cell--1-col-tablet mdl-cell--0-col-phone"></div>
+                    <div class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
                         <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="padding: 4px; width: 100%">
                             <textarea id="json-textarea" rows="10" wrap="off" style="border: 1px solid #EEEEEE; font-family: 'Roboto Mono', monospace; font-size: 8pt" readonly></textarea>
                             <div class="mdl-card__actions mdl-card--border">
@@ -65,11 +75,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mdl-cell mdl-cell--3-col"></div>
+                    <div class="mdl-cell mdl-cell--3-col mdl-cell--1-col-tablet mdl-cell--0-col-phone"></div>
 
                     <!-- 3rd row -->
-                    <div class="mdl-cell mdl-cell--3-col"></div>
-                    <div class="mdl-cell mdl-cell--6-col">
+                    <div class="mdl-cell mdl-cell--3-col mdl-cell--1-col-tablet mdl-cell--0-col-phone"></div>
+                    <div class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
                         <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="padding: 4px; width: 100%">
                             <div class="mdl-card__menu">
                                 <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-button--colored left"
@@ -86,7 +96,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mdl-cell mdl-cell--3-col"></div>
+                    <div class="mdl-cell mdl-cell--3-col mdl-cell--1-col-tablet mdl-cell--0-col-phone"></div>
                 </div>
             </div>
         </main>
