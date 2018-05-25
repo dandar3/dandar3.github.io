@@ -104,6 +104,18 @@
 
     <script type="text/javascript">
         /**
+         * String.format()
+         * https://stackoverflow.com/a/3492815/308836
+         */
+        String.prototype.format = function() {
+            var formatted = this;
+            for (var arg in arguments) {
+                formatted = formatted.replace("{" + arg + "}", arguments[arg]);
+            }
+            return formatted;
+        };
+
+        /**
          * Parse google-services.json...
          */
         function readGoogleServicesJson() {
