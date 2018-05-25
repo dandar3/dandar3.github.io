@@ -162,24 +162,28 @@
          * Generate google-services.xml...
          */
         function generateXml(project_info, client) {
-            // Textarea...
-            var xmlLines = [];
+            // Produce XML...
+            let xmlLines = [];
             xmlLines.push('<?xml version="1.0" encoding="utf-8"?>');
             xmlLines.push('<resources>');
-            xmlLines.push('    <string name="google_app_id"                  translatable="false">' + client.client_info.mobilesdk_app_id + '</string>');
-            xmlLines.push('    <string name="gcm_defaultSenderId"            translatable="false">' + project_info.project_number         + '</string>');
-            xmlLines.push('    <string name="google_storage_bucket"          translatable="false">' + project_info.storage_bucket         + '</string>');
-            xmlLines.push('    <string name="default_web_client_id"          translatable="false">' + client.oauth_client[0].client_id    + '</string>');
-            xmlLines.push('    <string name="firebase_database_url"          translatable="false">' + project_info.firebase_url           + '</string>');
-            xmlLines.push('    <string name="google_api_key"                 translatable="false">' + client.api_key[0].current_key       + '</string>');
-            xmlLines.push('    <string name="google_crash_reporting_api_key" translatable="false">' + client.api_key[0].current_key       + '</string>');
+            xmlLines.push('    <string name="default_web_client_id"          translatable="false">{0}</string>'.format(client.oauth_client.filter(function(oauth_client) {
+                                                                                                                                                        return oauth_client.client_type === 3;
+                                                                                                                                                  })[0].client_id));
+            xmlLines.push('    <string name="firebase_database_url"          translatable="false">{0}</string>'.format(project_info.firebase_url));
+            xmlLines.push('    <string name="gcm_defaultSenderId"            translatable="false">{0}</string>'.format(project_info.project_number));
+            xmlLines.push('    <string name="google_api_key"                 translatable="false">{0}</string>'.format(client.api_key[0].current_key));
+            xmlLines.push('    <string name="google_app_id"                  translatable="false">{0}</string>'.format(client.client_info.mobilesdk_app_id));
+            xmlLines.push('    <string name="google_crash_reporting_api_key" translatable="false">{0}</string>'.format(client.api_key[0].current_key));
+            xmlLines.push('    <string name="google_storage_bucket"          translatable="false">{0}</string>'.format(project_info.storage_bucket));
+            xmlLines.push('    <string name="project_id"                     translatable="false">{0}</string>'.format(project_info.project_id));
             xmlLines.push('</resources>');
-            var xmlText = xmlLines.join('\r\n');
+            let xmlText = xmlLines.join('\r\n');
 
+            // Textarea display...
             $('#xml-textarea').val(xmlText);
 
-            // Save button...
-            var dataUri = "data:text/xml;charset=UTF-8," + encodeURIComponent(xmlText);
+            // Download button...
+            let dataUri = "data:text/xml;charset=UTF-8," + encodeURIComponent(xmlText);
             $('#xml-download').attr('href', dataUri);
         }
     </script>
